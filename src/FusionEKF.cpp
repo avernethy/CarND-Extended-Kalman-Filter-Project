@@ -139,7 +139,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   float noise_ay = 9;
 
   ekf_.Q_ = MatrixXd(4,4);
-  ekd_.Q_ << dt_4/4*noise_ax, 0, dt_3/2*noise_ax, 0,
+  ekf_.Q_ << dt_4/4*noise_ax, 0, dt_3/2*noise_ax, 0,
              0, dt_4/4*noise_ay, 0, dt_3/3*noise_ay,
              dt_3/2*noise_ax, 0, dt_2*noise_ax, 0,
              0, dt_3/2*noise_ay, 0, dt_2*noise_ay;
@@ -158,10 +158,10 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
   if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
     // Radar updates
-    ekf_.UpdateEKF();
+    ekf_.UpdateEKF(const VectorXd &z);
   } else {
     // Laser updates
-    ekf_.Update();
+    ekf_.Update(const VectorXd &z);
   }
 
   // print the output
