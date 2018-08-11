@@ -70,7 +70,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     cout << "EKF: " << endl;
     ekf_.x_ = VectorXd(4);
     //ekf_.x_ << 1, 1, 1, 1;
-    ekf_.x_ << measurement_pack.raw_measurements_;
+    //ekf_.x_ << measurement_pack.raw_measurements_; This doesn't work
+    ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measurements_[1], 0, 0;
     cout << "reading measurement " << endl;
     cout << ekf_.x_ << endl;
 
