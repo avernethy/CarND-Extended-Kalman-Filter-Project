@@ -21,7 +21,6 @@ FusionEKF::FusionEKF() {
   R_radar_ = MatrixXd(3, 3);
   H_laser_ = MatrixXd(2, 4);
   Hj_      = MatrixXd(3, 4);
-  //Q_       = MatrixXd(4, 4);
 
   //measurement covariance matrix - laser
   R_laser_ << 0.0225, 0,
@@ -35,7 +34,7 @@ FusionEKF::FusionEKF() {
   /**
   TODO:
     * Finish initializing the FusionEKF.
-    * Set the process (Q) and measurement noises (R. Lesson 5.13, and above duh)
+    * Set the process (Q) and measurement noises (R. Lesson 5.13)
   */
   H_laser_ << 1, 0, 0, 0,
       0, 1, 0, 0;
@@ -104,6 +103,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
      ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measurements_[1], 0, 0;
      cout << "LASER" << endl;
      cout << ekf_.x_ << endl;
+     ekf_.R_ << R_laser_;
+     ekf_.H_ << H_laser_;
     }
     // update previous time stamp
     previous_timestamp_ = measurement_pack.timestamp_;
