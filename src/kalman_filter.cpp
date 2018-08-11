@@ -46,10 +46,10 @@ void KalmanFilter::Update(const VectorXd &z) {
   */
  // z = H * x + w
  // Update Step
- VectorXd z_pred = H_laser_ * x_;
+ VectorXd z_pred = H_ * x_;
  VectorXd y = z - z_pred;
- MatrixXd Ht = H_laser_.transpose();
- MatrixXd S = H_laser_ * P_ * Ht + R_laser_ ;
+ MatrixXd Ht = H_.transpose();
+ MatrixXd S = H_ * P_ * Ht + R_;
  MatrixXd Si = S.inverse();
  MatrixXd K = P_ * Ht * Si;
 
