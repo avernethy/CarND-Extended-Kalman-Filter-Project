@@ -64,7 +64,7 @@ void KalmanFilter::Update(const VectorXd &z) {
 
 //new state
 cout << "new state" << endl;
-x_ = x_ * (K * y);
+x_ = x_ + (K * y);
 cout << " IDENTITY" << endl;
 MatrixXd I = MatrixXd::Identity(4, 4);
 cout << "P_" << endl;
