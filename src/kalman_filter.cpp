@@ -48,7 +48,7 @@ void KalmanFilter::Update(const VectorXd &z) {
 
 //new state
 x_ = x_ (K * y);
-P_ = (I - K * H_) * P_;
+//P_ = (I - K * H_) * P_;
 
 }
 
