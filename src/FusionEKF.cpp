@@ -44,6 +44,18 @@ FusionEKF::FusionEKF() {
 		  0, 0, 0, 0,
 		  0, 0, 0, 0;
 
+  P_ = MatrixXd(4, 4);
+  P_ << 1, 0, 0, 0,
+        0, 1, 0, 1,
+        0, 0, 1000, 0,
+        0, 0, 0, 1000;
+
+  F_ = MatrixXd(4, 4);
+  F_ << 1, 0, 1, 0,
+        0, 1, 0, 1, 
+        0, 0, 1, 0,
+        0, 0, 0, 1;
+
 // Q? -> covariance matrix of the individual process noises
 
 }
@@ -91,12 +103,16 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
      cout << "LASER" << endl;
      cout << ekf_.x_ << endl;
     }
-
+    // update previous time stamp
+    previous_timestamp_ = measurement_pack.timestamp_;
     // done initializing, no need to predict or update
     is_initialized_ = true;
     return;
   }
 
+  //Compute time elapsed
+  float dt = measurement_pack.timestamp_ = previous_timestamp_;
+  previous_timestamp_ = measurement_pack.timestamp_;
   /*****************************************************************************
    *  Prediction
    ****************************************************************************/
@@ -108,7 +124,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
      * Update the process noise covariance matrix.
      * Use noise_ax = 9 and noise_ay = 9 for your Q matrix.
    */
-
+  ekf_.F_(0,2)
   ekf_.Predict();
 
   /*****************************************************************************
