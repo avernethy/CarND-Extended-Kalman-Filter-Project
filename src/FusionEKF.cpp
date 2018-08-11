@@ -83,7 +83,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       /**
       Initialize state.
       */
-     ekf_
+     
     }
 
     // done initializing, no need to predict or update
