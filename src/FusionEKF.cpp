@@ -44,17 +44,7 @@ FusionEKF::FusionEKF() {
 		  0, 0, 0, 0,
 		  0, 0, 0, 0;
 
-  P_ = MatrixXd(4, 4);
-  P_ << 1, 0, 0, 0,
-        0, 1, 0, 1,
-        0, 0, 1000, 0,
-        0, 0, 0, 1000;
-
-  F_ = MatrixXd(4, 4);
-  F_ << 1, 0, 1, 0,
-        0, 1, 0, 1, 
-        0, 0, 1, 0,
-        0, 0, 0, 1;
+  
 
 // Q? -> covariance matrix of the individual process noises
 
@@ -83,6 +73,18 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     ekf_.x_ = VectorXd(4);
     ekf_.x_ << 1, 1, 1, 1;
     //ekf_.x_ << measurement_pack.raw_measurements_; This doesn't work
+
+    ekf_.P_ = MatrixXd(4, 4);
+    ekf_.P_ << 1, 0, 0, 0,
+        0, 1, 0, 1,
+        0, 0, 1000, 0,
+        0, 0, 0, 1000;
+
+    ekf_.F_ = MatrixXd(4, 4);
+    ekf_.F_ << 1, 0, 1, 0,
+        0, 1, 0, 1, 
+        0, 0, 1, 0,
+        0, 0, 0, 1;
     
     cout << "reading measurement " << endl;
     cout << ekf_.x_ << endl;
