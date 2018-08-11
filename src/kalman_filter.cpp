@@ -46,17 +46,19 @@ void KalmanFilter::Update(const VectorXd &z) {
   */
  // z = H * x + w
  // Update Step
- VectorXd z_pred = H_ * x_;
- VectorXd y = z - z_pred;
- MatrixXd Ht = H_.transpose();
- MatrixXd S = H_ * P_ * Ht + R_;
- MatrixXd Si = S.inverse();
- MatrixXd K = P_ * Ht * Si;
+ cout << "CHECK R MATRIX" << endl;
+ cout << R_ << endl;
+ //VectorXd z_pred = H_ * x_;
+ //VectorXd y = z - z_pred;
+ //MatrixXd Ht = H_.transpose();
+ //MatrixXd S = H_ * P_ * Ht + R_;
+ //MatrixXd Si = S.inverse();
+ //MatrixXd K = P_ * Ht * Si;
 
 //new state
-x_ = x_ * (K * y);
-MatrixXd I = MatrixXd::Identity(4, 4);
-P_ = (I - K * H_) * P_;
+//x_ = x_ * (K * y);
+//MatrixXd I = MatrixXd::Identity(4, 4);
+//P_ = (I - K * H_) * P_;
 
 }
 
