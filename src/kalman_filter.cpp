@@ -11,19 +11,19 @@ KalmanFilter::KalmanFilter() {}
 KalmanFilter::~KalmanFilter() {}
 
 void KalmanFilter::Init(VectorXd &x_in, MatrixXd &P_in, MatrixXd &F_in,
-                        MatrixXd &H_in, MatrixXd &R_in, MatrixXd &Q_in,
-                        MatrixXd &H_laser_in, MatrixXd &R_laser_in,
-                        MatrixXd &Hj_in, MatrixXd &R_radar_in) {
+                        MatrixXd &H_in, MatrixXd &R_in, MatrixXd &Q_in){
+                       // MatrixXd &H_laser_in, MatrixXd &R_laser_in,
+                       // MatrixXd &Hj_in, MatrixXd &R_radar_in) {
   x_ = x_in;
   P_ = P_in;
   F_ = F_in;
   H_ = H_in;
   R_ = R_in;
   Q_ = Q_in;
-  H_laser_ = H_laser_in;
-  R_laser_ = R_laser_in;
-  Hj_ = Hj_in;
-  R_radar_ = R_radar_in;
+  //H_laser_ = H_laser_in;
+  //R_laser_ = R_laser_in;
+  //Hj_ = Hj_in;
+  //R_radar_ = R_radar_in;
 }
 
 void KalmanFilter::Predict() {

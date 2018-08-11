@@ -103,8 +103,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
      ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measurements_[1], 0, 0;
      cout << "LASER" << endl;
      cout << ekf_.x_ << endl;
-     ekf_.R_laser_ = R_laser_;
-     ekf_.H_laser_ = H_laser_;
     }
     // update previous time stamp
     previous_timestamp_ = measurement_pack.timestamp_;
@@ -159,11 +157,12 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
   if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
     // Radar updates
-
+    //ekf_.R_ = 
     ekf_.UpdateEKF(measurement_pack.raw_measurements_);
   } else {
     // Laser updates
     //VectorXd z = H_laser_ * ekf_.x_;
+    ekf_.R_ = R_laser_;
     ekf_.Update(measurement_pack.raw_measurements_);
   }
 
