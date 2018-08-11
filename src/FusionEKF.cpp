@@ -113,7 +113,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   }
 
   //Compute time elapsed
-  float dt = measurement_pack.timestamp_ = previous_timestamp_;
+  float dt = measurement_pack.timestamp_ - previous_timestamp_;
   previous_timestamp_ = measurement_pack.timestamp_;
   /*****************************************************************************
    *  Prediction
