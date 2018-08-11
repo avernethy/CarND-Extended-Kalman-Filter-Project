@@ -47,7 +47,7 @@ void KalmanFilter::Update(const VectorXd &z) {
  MatrixXd K = P_ * Ht * Si;
 
 //new state
-x_ = x_ (K * y);
+x_ = x_ * (K * y);
 //P_ = (I - K * H_) * P_;
 
 }
