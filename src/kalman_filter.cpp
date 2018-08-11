@@ -40,6 +40,7 @@ void KalmanFilter::Update(const VectorXd &z) {
   */
  // z = H * x + w
  // Update Step
+ //VectorXd z_pred = H_
  //VectorXd y = z - H_ * x_;
  //MatrixXd Ht = H_.transpose();
  //MatrixXd S = H_ * P_ * Ht + R_;
