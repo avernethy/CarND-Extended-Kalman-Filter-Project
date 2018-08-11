@@ -103,8 +103,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
      ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measurements_[1], 0, 0;
      cout << "LASER" << endl;
      cout << ekf_.x_ << endl;
-     ekf_.R_laser_ << R_laser_;
-     ekf_.H_laser_ << H_laser_;
+     ekf_.R_laser_ = R_laser_;
+     ekf_.H_laser_ = H_laser_;
     }
     // update previous time stamp
     previous_timestamp_ = measurement_pack.timestamp_;
