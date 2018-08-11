@@ -57,5 +57,10 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   TODO:
     * update the state by using Extended Kalman Filter equations
   */
+ // y = z - H * x' use Hj instead of H (already taken care of in H_ ?)
+ // S = H * P' Ht + R
+ // K = P' *  Ht * Si
+ // x = x' * K * y
+ // P = (I - K * H) * P' 
 
 }

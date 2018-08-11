@@ -21,6 +21,7 @@ FusionEKF::FusionEKF() {
   R_radar_ = MatrixXd(3, 3);
   H_laser_ = MatrixXd(2, 4);
   Hj_      = MatrixXd(3, 4);
+  //Q_       = MatrixXd(4, 4);
 
   //measurement covariance matrix - laser
   R_laser_ << 0.0225, 0,
@@ -68,7 +69,9 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     // first measurement
     cout << "EKF: " << endl;
     ekf_.x_ = VectorXd(4);
-    ekf_.x_ << 1, 1, 1, 1;
+    //ekf_.x_ << 1, 1, 1, 1;
+    ekf_.x_ << measurement_pack.raw_measurements_;
+    cout << ekf_.x[0]
 
     if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
       /**
@@ -79,6 +82,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       /**
       Initialize state.
       */
+     ekf_
     }
 
     // done initializing, no need to predict or update
