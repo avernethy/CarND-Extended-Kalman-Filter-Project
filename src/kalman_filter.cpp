@@ -124,11 +124,13 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  
  //cout << "y MATRIX" << endl;
  VectorXd y = z - z_pred; // need to be in polar coordinates
+ /*
  cout << "phi diff before   = " << y[1] << endl;
  int quot_phi;
  quot_phi = y[1] / (2 * PI);
  y[1] = y[1] - quot_phi * 2 * PI;
  cout << "phi diff after   = " << y[1] << "\n" <<endl;
+ */
 
  
  //cout << "Ht MATRIX" << endl;
