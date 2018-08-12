@@ -68,7 +68,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       * Remember: you'll need to convert radar from polar to cartesian coordinates.
     */
     // first measurement
-    cout << "EKF: " << endl;
+    //cout << "EKF: " << endl;
     ekf_.x_ = VectorXd(4);
     ekf_.x_ << 1, 1, 1, 1;
     //ekf_.x_ << measurement_pack.raw_measurements_; This doesn't work
@@ -85,8 +85,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
         0, 0, 1, 0,
         0, 0, 0, 1;
     
-    cout << "reading measurement " << endl;
-    cout << ekf_.x_ << endl;
+    //cout << "reading measurement " << endl;
+    //cout << ekf_.x_ << endl;
 
     if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
       /**
@@ -98,16 +98,16 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
                 0,
                 measurement_pack.raw_measurements_[0]*sin(measurement_pack.raw_measurements_[1]),
                 measurement_pack.raw_measurements_[0]*cos(measurement_pack.raw_measurements_[1]);
-     cout << "RADAR init" << endl;
-     cout << ekf_.x_ << endl;
+     //cout << "RADAR init" << endl;
+     //cout << ekf_.x_ << endl;
     }
     else if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) {
       /**
       Initialize state.
       */
      ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measurements_[1], 0, 0;
-     cout << "LASER init" << endl;
-     cout << ekf_.x_ << endl;
+     //cout << "LASER init" << endl;
+     //cout << ekf_.x_ << endl;
     }
     
     // update previous time stamp
@@ -176,6 +176,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   }
 
   // print the output
-  cout << "x_ = " << ekf_.x_ << endl;
-  cout << "P_ = " << ekf_.P_ << endl;
+  //cout << "x_ = " << ekf_.x_ << endl;
+  //cout << "P_ = " << ekf_.P_ << endl;
 }
