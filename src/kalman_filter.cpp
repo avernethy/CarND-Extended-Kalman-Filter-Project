@@ -108,12 +108,12 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  
  z_pred[1] = atan2(py , px) - 0 * PI;
  
- //if (abs(rho_pred) < 0.0001){
- //  z_pred[2] = z[2];
- //}
- //else{
+ if (abs(rho_pred) < 0.0001){
+   z_pred[2] = z[2];
+ }
+ else{
  z_pred[2] = (py*vy + px*vx) / rho_pred;
- //}
+ }
 
  cout << "phi_pred   = " << z_pred[1] <<endl;
  cout << "phi actual = " << z[1] << endl;
@@ -124,13 +124,13 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  
  //cout << "y MATRIX" << endl;
  VectorXd y = z - z_pred; // need to be in polar coordinates
- /*
+ 
  cout << "phi diff before   = " << y[1] << endl;
  int quot_phi;
  quot_phi = y[1] / (2 * PI);
  y[1] = y[1] - quot_phi * 2 * PI;
  cout << "phi diff after   = " << y[1] << "\n" <<endl;
- */
+ 
 
  
  //cout << "Ht MATRIX" << endl;
