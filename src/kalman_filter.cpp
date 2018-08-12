@@ -81,7 +81,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  // K = P' *  Ht * Si
  // x = x' * K * y
 
- VectorXd z_pred(4);
+ VectorXd z_pred(3);
  cout << "Declare" << endl;
  cout << z_pred << endl; 
  
