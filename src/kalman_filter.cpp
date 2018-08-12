@@ -37,8 +37,6 @@ void KalmanFilter::Predict() {
   x_ = F_ * x_;
   MatrixXd Ft = F_.transpose();
   P_ = F_ * P_ * Ft + Q_;
-
-
 }
 
 void KalmanFilter::Update(const VectorXd &z) {
@@ -48,18 +46,18 @@ void KalmanFilter::Update(const VectorXd &z) {
   */
  // z = H * x + w
  // Update Step
- cout << "CHECK R MATRIX" << endl;
- cout << R_ << endl;
+ //cout << "CHECK R MATRIX" << endl;
+ //cout << R_ << endl;
  VectorXd z_pred = H_ * x_;
- cout << "y MATRIX" << endl;
+ //cout << "y MATRIX" << endl;
  VectorXd y = z - z_pred;
- cout << "Ht MATRIX" << endl;
+ //cout << "Ht MATRIX" << endl;
  MatrixXd Ht = H_.transpose();
- cout << "S MATRIX" << endl;
+ //cout << "S MATRIX" << endl;
  MatrixXd S = H_ * P_ * Ht + R_;
- cout << "Si MATRIX" << endl;
+ //cout << "Si MATRIX" << endl;
  MatrixXd Si = S.inverse();
- cout << "K MATRIX" << endl;
+ //cout << "K MATRIX" << endl;
  MatrixXd K = P_ * Ht * Si;
 
 //new state
@@ -77,10 +75,29 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   TODO:
     * update the state by using Extended Kalman Filter equations
   */
+ 
  // y = z - H * x' use Hj instead of H (already taken care of in H_ ?)
  // S = H * P' Ht + R
  // K = P' *  Ht * Si
  // x = x' * K * y
- // P = (I - K * H) * P' 
+ VectorXd z_pred = H_ * x_;
+ //cout << "y MATRIX" << endl;
+ VectorXd y = z - z_pred; // need to be in polar coordinates
+ //cout << "Ht MATRIX" << endl;
+ MatrixXd Ht = H_.transpose();
+ //cout << "S MATRIX" << endl;
+ MatrixXd S = H_ * P_ * Ht + R_;
+ //cout << "Si MATRIX" << endl;
+ MatrixXd Si = S.inverse();
+ //cout << "K MATRIX" << endl;
+ MatrixXd K = P_ * Ht * Si;
+
+//new state
+cout << "new state" << endl;
+x_ = x_ + (K * y);
+cout << " IDENTITY" << endl;
+MatrixXd I = MatrixXd::Identity(4, 4);
+cout << "P_" << endl;
+P_ = (I - K * H_) * P_; 
 
 }

@@ -92,8 +92,13 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       /**
       Convert radar from polar to cartesian coordinates and initialize state.
       */
-     ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measurements_[1], measurement_pack.raw_measurements_[2], 0;
-     cout << "RADAR" << endl;
+     //use the radar measurements \rhoρ and \phiϕ to initialize the state variable locations px, py 
+     // from tips and tricks # 
+     ekf_.x_ << 0,
+                0,
+                measurement_pack.raw_measurements_[0]*sin(measurement_pack.raw_measurements_[1]),
+                measurement_pack.raw_measurements_[0]*cos(measurement_pack.raw_measurements_[1]);
+     cout << "RADAR init" << endl;
      cout << ekf_.x_ << endl;
     }
     else if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) {
@@ -101,9 +106,10 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       Initialize state.
       */
      ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measurements_[1], 0, 0;
-     cout << "LASER" << endl;
+     cout << "LASER init" << endl;
      cout << ekf_.x_ << endl;
     }
+    
     // update previous time stamp
     previous_timestamp_ = measurement_pack.timestamp_;
     // done initializing, no need to predict or update
@@ -157,8 +163,10 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
   if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
     // Radar updates
-    //ekf_.R_ = 
+    ekf_.R_ = R_radar_;
+    ekf_.H_ = Tools::CalculateJacobian(const VectorXd& ekf_.x_);
     ekf_.UpdateEKF(measurement_pack.raw_measurements_);
+    
   } else {
     // Laser updates
     //VectorXd z = H_laser_ * ekf_.x_;
