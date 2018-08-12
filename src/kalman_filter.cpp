@@ -81,8 +81,9 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  // K = P' *  Ht * Si
  // x = x' * K * y
 
- VectorXd z_pred = 0, 0, 0, 0;
- z_pred[0] = sqrt(x_[2] * x_[2] + x_[3] * x_[3])
+ VectorXd z_pred(4) 
+ z_pred << 0, 0, 0, 0;
+ z_pred[0] = sqrt(x_[2] * x_[2] + x_[3] * x_[3]);
  //cout << "y MATRIX" << endl;
  VectorXd y = z - z_pred; // need to be in polar coordinates
  //cout << "Ht MATRIX" << endl;
