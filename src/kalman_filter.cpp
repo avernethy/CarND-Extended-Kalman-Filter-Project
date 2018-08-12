@@ -61,11 +61,11 @@ void KalmanFilter::Update(const VectorXd &z) {
  MatrixXd K = P_ * Ht * Si;
 
 //new state
-cout << "new state" << endl;
+//cout << "new state" << endl;
 x_ = x_ + (K * y);
-cout << " IDENTITY" << endl;
+//cout << " IDENTITY" << endl;
 MatrixXd I = MatrixXd::Identity(4, 4);
-cout << "P_" << endl;
+//cout << "P_" << endl;
 P_ = (I - K * H_) * P_;
 
 }
@@ -93,11 +93,11 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  MatrixXd K = P_ * Ht * Si;
 
 //new state
-cout << "new state" << endl;
+//cout << "new state" << endl;
 x_ = x_ + (K * y);
-cout << " IDENTITY" << endl;
+//cout << " IDENTITY" << endl;
 MatrixXd I = MatrixXd::Identity(4, 4);
-cout << "P_" << endl;
+//cout << "P_" << endl;
 P_ = (I - K * H_) * P_; 
 
 }
