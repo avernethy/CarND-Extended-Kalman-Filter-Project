@@ -92,7 +92,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  cout << "manipulate" << endl;
  cout << "x_ = "<< x_ << endl;
  z_pred[0] = sqrt(x_[2] * x_[2] + x_[3] * x_[3]);
- z_pred[1] = arctan2(x_[3]/x_[2]);
+ z_pred[1] = arctan(x_[3]/x_[2]);
  z_pred[2] = x_[2] * x_[0] + x_[1] * x_[3] / z_pred[0];
  cout << z_pred << endl;
  
