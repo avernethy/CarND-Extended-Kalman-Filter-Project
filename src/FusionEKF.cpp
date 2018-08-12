@@ -94,10 +94,10 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       */
      //use the radar measurements \rhoρ and \phiϕ to initialize the state variable locations px, py 
      // from tips and tricks # 
-     ekf_.x_ << 0,
+     ekf_.x_ << measurement_pack.raw_measurements_[0]*sin(measurement_pack.raw_measurements_[1]),
+                measurement_pack.raw_measurements_[0]*cos(measurement_pack.raw_measurements_[1]),
                 0,
-                measurement_pack.raw_measurements_[0]*sin(measurement_pack.raw_measurements_[1]),
-                measurement_pack.raw_measurements_[0]*cos(measurement_pack.raw_measurements_[1]);
+                0;
      //cout << "RADAR init" << endl;
      //cout << ekf_.x_ << endl;
     }
@@ -173,7 +173,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     //VectorXd z = H_laser_ * ekf_.x_;
     ekf_.R_ = R_laser_;
     ekf_.H_ = H_laser_;
-    //ekf_.Update(measurement_pack.raw_measurements_);
+    ekf_.Update(measurement_pack.raw_measurements_);
   }
 
   // print the output
