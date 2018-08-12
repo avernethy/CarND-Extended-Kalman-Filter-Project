@@ -94,8 +94,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       */
      //use the radar measurements \rhoρ and \phiϕ to initialize the state variable locations px, py 
      // from tips and tricks # 
-     ekf_.x_ << measurement_pack.raw_measurements_[0]*sin(measurement_pack.raw_measurements_[1]),
-                measurement_pack.raw_measurements_[0]*cos(measurement_pack.raw_measurements_[1]),
+     ekf_.x_ << measurement_pack.raw_measurements_[0]*cos(measurement_pack.raw_measurements_[1]),
+                measurement_pack.raw_measurements_[0]*sin(measurement_pack.raw_measurements_[1]),
                 0,
                 0;
      //cout << "RADAR init" << endl;
@@ -118,7 +118,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   }
 
   //Compute time elapsed
-  float dt = measurement_pack.timestamp_ - previous_timestamp_;
+  float dt = (measurement_pack.timestamp_ - previous_timestamp_)/ 1000000.0;
   previous_timestamp_ = measurement_pack.timestamp_;
   /*****************************************************************************
    *  Prediction

@@ -128,11 +128,11 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 //new state
 //cout << "new state" << endl;
 x_ = x_ + (K * y);
-cout << "x_" << x_ <<endl;
+//cout << "x_" << x_ <<endl;
 //cout << " IDENTITY" << endl;
 MatrixXd I = MatrixXd::Identity(4, 4);
 
 P_ = (I - K * H_) * P_; 
-cout << "P_" << P_ <<endl;
+//cout << "P_" << P_ <<endl;
 
 }
