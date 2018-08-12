@@ -1,7 +1,7 @@
 #include "kalman_filter.h"
 #include <iostream>
 //#include <math.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 
 #define PI 3.14159265
 
@@ -124,9 +124,10 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  
  //cout << "y MATRIX" << endl;
  VectorXd y = z - z_pred; // need to be in polar coordinates
- div_t divresult;
- divresult = div (y[1],2 * PI);
- y[1] = y[1] - divresult.quot * 2 * PI;
+ 
+ int quot_phi;
+ quot_phi = y[1] / (2 * PI);
+ y[1] = y[1] -quot_phi * 2 * PI;
 
  
  //cout << "Ht MATRIX" << endl;
