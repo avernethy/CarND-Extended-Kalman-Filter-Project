@@ -96,11 +96,11 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  //cout << "manipulate" << endl;
  //cout << "x_ = "<< x_ << endl;
 
- float vx = x_[0];
- float vy = x_[1];
- float px = x_[2];
- float py = x_[3];
- z_pred[0] = sqrt(px*px + py * py);
+ float px = x_[0];
+ float py = x_[1];
+ float vx = x_[2];
+ float vy = x_[3];
+ z_pred[0] = sqrt(px*px + py*py);
  if (abs(px) > 0.0001){
    z_pred[1] = atan2(py , px);
  }
