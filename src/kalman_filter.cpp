@@ -100,12 +100,19 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  float py = x_[1];
  float vx = x_[2];
  float vy = x_[3];
- z_pred[0] = sqrt(px*px + py*py);
+ float rho_pred = sqrt(px*px + py*py);
+
+ z_pred[1 = rho_pred]
  
  z_pred[1] = atan2(py , px) - 0 * PI;
  
- 
- z_pred[2] = (py*vy + px*vx) / z_pred[0];
+ if (rho_pred < 0.0001){
+   z_pred[2] = z[2]
+ }
+ else{
+ z_pred[2] = (py*vy + px*vx) / rho_pred;
+ }
+
  cout << "phi_pred   = " << z_pred[1] <<endl;
  cout << "phi actual = " << z[1] << endl;
  cout << "phi diff   = " << z[1]-z_pred[1] << "\n" <<endl;
