@@ -82,11 +82,20 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  // x = x' * K * y
 
  VectorXd z_pred(4);
+ cout << "Declare" << endl;
  cout << z_pred << endl; 
+ 
+ cout << "initialize" << endl;
  z_pred << 0, 0, 0, 0;
- cout << z_pred << endl;
+  cout << z_pred << endl;
+ 
+ cout << "manipulate" << endl;
  z_pred[0] = sqrt(x_[2] * x_[2] + x_[3] * x_[3]);
  cout << z_pred << endl;
+ 
+ cout << "z" << endl;
+ cout << z << endl;
+ 
  cout << "y MATRIX" << endl;
  VectorXd y = z - z_pred; // need to be in polar coordinates
  cout << "Ht MATRIX" << endl;
