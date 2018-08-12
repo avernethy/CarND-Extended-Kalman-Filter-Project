@@ -114,23 +114,23 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  cout << "z" << endl;
  //cout << z << endl;
  
- cout << "y MATRIX" << endl;
+ //cout << "y MATRIX" << endl;
  VectorXd y = z - z_pred; // need to be in polar coordinates
- cout << "Ht MATRIX" << endl;
+ //cout << "Ht MATRIX" << endl;
  MatrixXd Ht = H_.transpose();
- cout << "S MATRIX" << endl;
+ //cout << "S MATRIX" << endl;
  MatrixXd S = H_ * P_ * Ht + R_;
- cout << "Si MATRIX" << endl;
+ //cout << "Si MATRIX" << endl;
  MatrixXd Si = S.inverse();
- cout << "K MATRIX" << endl;
+ //cout << "K MATRIX" << endl;
  MatrixXd K = P_ * Ht * Si;
 
 //new state
-cout << "new state" << endl;
+//cout << "new state" << endl;
 x_ = x_ + (K * y);
-cout << " IDENTITY" << endl;
+//cout << " IDENTITY" << endl;
 MatrixXd I = MatrixXd::Identity(4, 4);
-cout << "P_" << endl;
+//cout << "P_" << endl;
 P_ = (I - K * H_) * P_; 
 
 }
