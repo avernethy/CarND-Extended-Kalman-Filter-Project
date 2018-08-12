@@ -128,7 +128,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  cout << "phi diff before   = " << y[1] << endl;
  int quot_phi;
  quot_phi = y[1] / (2 * PI);
- y[1] = y[1] - quot_phi * 2 * PI;
+ y[1] = y[1] - quot_phi * PI;
  cout << "phi diff after   = " << y[1] << "\n" <<endl;
  
 
