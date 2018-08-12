@@ -102,12 +102,12 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  float vy = x_[3];
  float rho_pred = sqrt(px*px + py*py);
 
- z_pred[1 = rho_pred]
+ z_pred[1] = rho_pred;
  
  z_pred[1] = atan2(py , px) - 0 * PI;
  
  if (rho_pred < 0.0001){
-   z_pred[2] = z[2]
+   z_pred[2] = z[2];
  }
  else{
  z_pred[2] = (py*vy + px*vx) / rho_pred;
