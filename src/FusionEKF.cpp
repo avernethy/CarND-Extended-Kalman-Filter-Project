@@ -75,15 +75,15 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
     ekf_.P_ = MatrixXd(4, 4);
     ekf_.P_ << 1, 0, 0, 0,
-        0, 1, 0, 1,
-        0, 0, 1000, 0,
-        0, 0, 0, 1000;
+               0, 1, 0, 1,
+               0, 0, 1000, 0,
+               0, 0, 0, 1000;
 
     ekf_.F_ = MatrixXd(4, 4);
     ekf_.F_ << 1, 0, 1, 0,
-        0, 1, 0, 1, 
-        0, 0, 1, 0,
-        0, 0, 0, 1;
+               0, 1, 0, 1, 
+               0, 0, 1, 0,
+               0, 0, 0, 1;
     
     //cout << "reading measurement " << endl;
     //cout << ekf_.x_ << endl;
@@ -164,8 +164,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
     // Radar updates
     ekf_.R_ = R_radar_;
-    ekf_.H_ = tools.CalculateJacobian(ekf_.x_);
-    //ekf_.UpdateEKF(measurement_pack.raw_measurements_);
+    ekf_.H_ = tools.CalculateJacobian(ekf_.x_); //predicted state to update the Jacobian Matrix Hj
+    ekf_.UpdateEKF(measurement_pack.raw_measurements_);
     
   } else {
     // Laser updates

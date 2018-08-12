@@ -1,5 +1,8 @@
 #include "kalman_filter.h"
 #include <iostream>
+#include <math.h>
+
+#define PI 3.14159265
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
@@ -80,28 +83,34 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  // S = H * P' Ht + R
  // K = P' *  Ht * Si
  // x = x' * K * y
+ // z = [rho phi rhoDot]
 
  VectorXd z_pred(3);
- cout << "Declare" << endl;
- cout << z_pred << endl; 
+ //cout << "Declare" << endl;
+ //cout << z_pred << endl; 
  
- cout << "initialize" << endl;
+ //cout << "initialize" << endl;
  z_pred << 0, 0, 0;
- cout << z_pred << endl;
+ //cout << z_pred << endl;
  
- cout << "manipulate" << endl;
- cout << "x_ = "<< x_ << endl;
- z_pred[0] = sqrt(x_[2] * x_[2] + x_[3] * x_[3]);
- z_pred[1] = (x_[3]/x_[2]);
- z_pred[2] = x_[2] * x_[0] + x_[1] * x_[3] / z_pred[0];
- cout << z_pred << endl;
+ //cout << "manipulate" << endl;
+ //cout << "x_ = "<< x_ << endl;
+
+ float vx = x_[0];
+ float vy = x_[1];
+ float px = x_[2];
+ float py = x_[3];
+ z_pred[0] = sqrt(px*px + py * py);
+ z_pred[1] = atan2(py/px);
+ z_pred[2] = (py*vy + px*vx) / z_pred[0];
+ cout << "phi = " << z_pred[1] <<endl;
  
- cout << "z" << endl;
- cout << z << endl;
+ //cout << "z" << endl;
+ //cout << z << endl;
  
- cout << "y MATRIX" << endl;
+ //cout << "y MATRIX" << endl;
  VectorXd y = z - z_pred; // need to be in polar coordinates
- cout << "Ht MATRIX" << endl;
+ //cout << "Ht MATRIX" << endl;
  MatrixXd Ht = H_.transpose();
  //cout << "S MATRIX" << endl;
  MatrixXd S = H_ * P_ * Ht + R_;
