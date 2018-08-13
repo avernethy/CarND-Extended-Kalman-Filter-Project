@@ -69,10 +69,10 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     //ekf_.x_ << measurement_pack.raw_measurements_; This doesn't work
 
     ekf_.P_ = MatrixXd(4, 4);
-    ekf_.P_ << 1, 1, 1, 1,
-               1, 1, 1, 1,
-               1, 1, 1, 1,
-               1, 1, 1, 1;
+    ekf_.P_ << 0.02, -0.03, 0.02, -0.03,
+               -0.03, 0.073, -0.04, 0.08,
+               0.03, -0.04, -0.08, -0.08,
+               -0.03, 0.08, -0.08, .19;
 
     ekf_.F_ = MatrixXd(4, 4);
     ekf_.F_ << 1, 0, 1, 0,
