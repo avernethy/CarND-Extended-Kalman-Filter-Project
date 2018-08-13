@@ -42,11 +42,6 @@ FusionEKF::FusionEKF() {
   Hj_ << 1, 1, 0, 0,
 		  -1, 1, 0, 0,
 		  1, 1, 1, 1;
-
-  
-
-// Q? -> covariance matrix of the individual process noises
-
 }
 
 /**
@@ -84,6 +79,12 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
                0, 1, 0, 1, 
                0, 0, 1, 0,
                0, 0, 0, 1;
+
+    ekf_.Q_ = MatrixXd(4,4);
+    ekf_.Q_ << 1, 0, 1, 0,
+             0, 1, 0, 1,
+             1, 0, 1, 0,
+             0, 1, 0, 1;
     
     //cout << "reading measurement " << endl;
     //cout << ekf_.x_ << endl;
@@ -140,10 +141,9 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   float dt_3 = dt_2 * dt;
   float dt_4 = dt_3 * dt;
 
-  float noise_ax = 6;
-  float noise_ay = 6;
+  float noise_ax = 1;
+  float noise_ay = 1;
 
-  ekf_.Q_ = MatrixXd(4,4);
   ekf_.Q_ << dt_4/4*noise_ax, 0, dt_3/2*noise_ax, 0,
              0, dt_4/4*noise_ay, 0, dt_3/3*noise_ay,
              dt_3/2*noise_ax, 0, dt_2*noise_ax, 0,
