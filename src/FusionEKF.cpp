@@ -117,7 +117,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     is_initialized_ = true;
     return;
   }
-
+cout << "previous timestamp" << previous_timestamp_ << endl;
   //Compute time elapsed
   float dt = (measurement_pack.timestamp_ - previous_timestamp_)/ 1000000.0;
   previous_timestamp_ = measurement_pack.timestamp_;

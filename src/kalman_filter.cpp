@@ -115,9 +115,9 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
  z_pred[2] = (py*vy + px*vx) / rho_pred;
  }
 
- cout << "phi_pred   = " << z_pred[1] <<endl;
- cout << "phi actual = " << z[1] << endl;
- cout << "phi diff   = " << z[1]-z_pred[1] << endl;
+ //cout << "phi_pred   = " << z_pred[1] <<endl;
+ //cout << "phi actual = " << z[1] << endl;
+ //cout << "phi diff   = " << z[1]-z_pred[1] << endl;
  
  //cout << "z" << endl;
  //cout << z << endl;
